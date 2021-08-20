@@ -1,17 +1,32 @@
-<div class="container" *ngFor='let goal of goalsList; let i = index' >
-    <ul>
-        <p>some data</p>
-        <li >
-            <button class="btn btn-primary"(click)='toggleDetails(i)'>Toggle Details</button>
-            {{goal.name}}
-            <app-goal-detail  *ngIf='goal.showDescription' [goal]="goal" (isComplete) = 'completeGoal($event,i)'></app-goal-detail>
-        </li>
+<div class="container">
+    <ng-progress></ng-progress>
+    <blockquote class="blockquote text-center">
+        <p class="mb-0">{{quote.quote}}</p>
+        <footer class="blockquote-footer"><cite>{{quote.author}}</cite></footer>
+    </blockquote>
 
-    </ul>
+    <div *ngFor='let gif of gifs; let i = index'>
+        <p>{{gif.title}}</p>
+        <img src={{gif.images.downsized.url}} alt='a gif' />
+    </div>
+
+
+    <div *ngFor='let goal of goalsList; let i = index'>
+        <ul>
+            <p>some data</p>
+            <li>
+                <button class="btn btn-primary" (click)='toggleDetails(i)'>Toggle Details</button>
+                {{goal.name}}
+                <app-goal-detail *ngIf='goal.showDescription' [goal]="goal" (isComplete)='completeGoal($event,i)'>
+                </app-goal-detail>
+            </li>
+
+        </ul>
+    </div>
+
+    <div class="container">
+        <app-goal-form></app-goal-form>
+    </div>
 </div>
 
-<div class="container"> 
-    <app-goal-form></app-goal-form>
-</div>
 
-<p *ngIf='goalsList.length > 5'>You have too many goals</p>
